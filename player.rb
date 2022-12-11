@@ -23,7 +23,7 @@ class Player
     x_or_o unless game_piece == 'X' || game_piece == 'O'
   end
 
-  def update_player_pieces
+  def different_player_pieces?
     if Player.pieces.nil?
       x_or_o
       Player.pieces = [game_piece]
