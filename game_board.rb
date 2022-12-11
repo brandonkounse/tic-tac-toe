@@ -14,15 +14,25 @@ class GameBoard
     puts "\n#{player_one.name}: #{player_one.game_piece} | #{player_two.name}: #{player_two.game_piece}"
   end
 
-  def display_game_board
+  def top_row_squares
     puts "\n  1  |  2  |  3  "
     print '------------------'
+  end
+
+  def middle_row_squares
     puts "\n  4  |  5  |  6  "
     print '------------------'
+  end
+
+  def bottom_row_squares
     puts "\n  7  |  8  |  9  \n"
   end
 
-  def update_game_board
-    
+  def display_game_board
+    top_row_squares
+    middle_row_squares
+    bottom_row_squares
   end
+
+  def update_game_board; end
 end
