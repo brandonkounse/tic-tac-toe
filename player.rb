@@ -8,8 +8,8 @@ class Player
 
   attr_accessor :name, :game_piece, :player_number
 
-  def initialize(player_x)
-    @player_number = player_x
+  def initialize(player)
+    @player_number = player
   end
 
   def player_info
@@ -18,7 +18,7 @@ class Player
   end
 
   def x_or_o
-    print "Please pick X or O for player #{player_number}: "
+    puts "Please pick X or O for player #{player_number}: "
     self.game_piece = gets.chomp.upcase
     x_or_o unless game_piece == 'X' || game_piece == 'O'
   end
