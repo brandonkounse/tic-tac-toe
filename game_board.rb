@@ -14,8 +14,8 @@ class GameBoard
     puts "\n#{player_one.name}: #{player_one.game_piece} | #{player_two.name}: #{player_two.game_piece}"
   end
 
-  def top_row_squares
-    puts "\n  1  |  2  |  3  "
+  def top_row_squares(sq1 = '1', sq2 = '2', sq3 = '3')
+    puts "\n  #{sq1}  |  #{sq2}  |  #{sq3}  "
     print '------------------'
   end
 

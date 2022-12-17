@@ -29,10 +29,10 @@ class Player
       Player.pieces = [game_piece]
     elsif Player.pieces.include?('X')
       self.game_piece = 'O'
-      Player.pieces += [game_piece]
+      Player.pieces.push(game_piece)
     else
       self.game_piece = 'X'
-      Player.pieces += [game_piece]
+      Player.pieces.push(game_piece)
     end
   end
 end
