@@ -13,4 +13,4 @@ p2.different_player_pieces?
 
 new_game = GameBoard.new
 new_game.display_player_pieces(p1, p2)
-new_game.display_game_board
+new_game.display_game_board(new_game.game_squares)
