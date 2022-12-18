@@ -9,7 +9,7 @@ class Player
   attr_accessor :name, :game_piece, :player_number
 
   def initialize(player)
-    @player_number = player
+    self.player_number = player
   end
 
   def player_info

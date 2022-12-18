@@ -15,11 +15,12 @@ class GameBoard
   end
 
   def display_game_board
+    display_player_pieces
     puts " #{game_squares[0..2].join(' | ')}"
     puts '-----------'
     puts " #{game_squares[3..5].join(' | ')}"
     puts '-----------'
-    puts " #{game_squares[6..8].join(' | ')}"
+    puts " #{game_squares[6..8].join(' | ')}\n\n"
   end
 
   def add_game_piece
@@ -40,7 +41,6 @@ class GameBoard
   def game_loop
     count = 0
     while count < 5
-      display_player_pieces
       display_game_board
       add_game_piece
       update_board
