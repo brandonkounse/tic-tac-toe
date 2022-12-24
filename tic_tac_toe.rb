@@ -2,13 +2,21 @@
 
 require './game_board'
 require './player'
+require './game_play'
 
-p1 = Player.new(1)
-p2 = Player.new(2)
-p1.player_info
-p2.player_info
-p1.different_player_pieces?
-p2.different_player_pieces?
+# The main game loop
+class TicTacToe
+  include GamePlay
 
-game = GameBoard.new(p1, p2)
-game.game_loop
+  def initialize
+    game = GameBoard.new
+    game.draw_board
+    player1 = Player.new('Player 1', player_piece('X'))
+    player2 = Player.new('Player 2', player_piece('O'))
+
+    p player1.piece
+    p player2.piece
+  end
+end
+
+game = TicTacToe.new

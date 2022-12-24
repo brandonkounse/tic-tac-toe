@@ -1,50 +1,22 @@
 # frozen_string_literal: true
 
-# create game board which will update X and O index_of_square
+# Game board to play X's and O's
 class GameBoard
-  attr_accessor :game_squares, :current_move, :player_one, :player_two
+  attr_accessor :game_board, :board_spaces
 
-  def initialize(player_one, player_two)
-    self.player_one = player_one
-    self.player_two = player_two
-    self.game_squares = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  def initialize
+    @board_spaces = [*1..9]
   end
 
-  def display_player_pieces
-    puts "\n#{player_one.name}: #{player_one.game_piece} | #{player_two.name}: #{player_two.game_piece}\n\n"
-  end
-
-  def display_game_board
-    display_player_pieces
-    puts " #{game_squares[0..2].join(' | ')}"
-    puts '-----------'
-    puts " #{game_squares[3..5].join(' | ')}"
-    puts '-----------'
-    puts " #{game_squares[6..8].join(' | ')}\n\n"
-  end
-
-  def add_game_piece
-    puts 'Please enter the number for the square you choose: '
-    self.current_move = gets.chomp.to_i
-    if current_move >= 1 || current_move <= 9
-      current_move
-    else
-      add_game_piece
-    end
+  def draw_board
+    puts "\n #{@board_spaces[0..2].join(' | ')}"
+    puts "-----------\n"
+    puts " #{@board_spaces[3..5].join(' | ')}"
+    puts "-----------\n"
+    puts " #{@board_spaces[6..8].join(' | ')}\n\n"
   end
 
   def update_board
-    position = game_squares.index(current_move)
-    game_squares[position] = player_one.game_piece
-  end
-
-  def game_loop
-    count = 0
-    while count < 5
-      display_game_board
-      add_game_piece
-      update_board
-      count += 1
-    end
+    
   end
 end
