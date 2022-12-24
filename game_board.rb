@@ -6,6 +6,7 @@ class GameBoard
 
   def initialize
     @board_spaces = [*1..9]
+    draw_board
   end
 
   def draw_board
@@ -16,7 +17,8 @@ class GameBoard
     puts " #{@board_spaces[6..8].join(' | ')}\n\n"
   end
 
-  def update_board
-    
+  def update_board(selection, player_piece)
+    @board_spaces[selection - 1] = player_piece.piece
+    draw_board
   end
 end
