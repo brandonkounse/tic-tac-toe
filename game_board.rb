@@ -17,8 +17,17 @@ class GameBoard
     puts " #{@board_spaces[6..8].join(' | ')}\n\n"
   end
 
-  def update_board(selection, player_piece)
-    @board_spaces[selection - 1] = player_piece.piece
+  def update_board(selection, piece)
+    @board_spaces[selection - 1] = piece
     draw_board
+  end
+
+  def square_available?(selection)
+    if @board_spaces[selection].is_a? Numeric
+      true
+    else
+      puts 'That square is already occupied'
+      false
+    end
   end
 end
