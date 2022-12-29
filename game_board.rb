@@ -6,7 +6,6 @@ class GameBoard
 
   def initialize
     @board_spaces = [*1..9]
-    draw_board
   end
 
   def draw_board
@@ -17,16 +16,23 @@ class GameBoard
     puts " #{@board_spaces[6..8].join(' | ')}\n\n"
   end
 
-  def update_board(selection, piece)
+  def update_board_spaces(selection, piece)
     @board_spaces[selection - 1] = piece
-    draw_board
   end
 
   def square_available?(selection)
-    if @board_spaces[selection].is_a? Numeric
+    if @board_spaces[selection - 1].is_a? Numeric
       true
     else
       puts 'That square is already occupied'
+      false
+    end
+  end
+
+  def board_full?
+    if @board_spaces.all? { |spaces| spaces.is_a? String }
+      true
+    else
       false
     end
   end
