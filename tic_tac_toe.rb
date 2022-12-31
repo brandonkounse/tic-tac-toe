@@ -12,6 +12,10 @@ class TicTacToe
     @game_won = false
   end
 
+  def list_players(player1, player2)
+    puts "\n#{player1.name}: #{player1.piece}  |  #{player2.name}: #{player2.piece}"
+  end
+
   def take_turn(player, board)
     player.place_piece
     if board.square_available?(player.selection)
@@ -40,7 +44,13 @@ class TicTacToe
   end
 
   def victory(player)
-    return puts "#{player.name} is the winner!" if @game_won == true
+    if @game_won == true
+      puts "#{player.name} is the winner!"
+    elsif @game_over == true
+      puts 'The game is a tie!'
+    else
+      system 'clear'
+    end
   end
 
   def game_loop(player, board, game)

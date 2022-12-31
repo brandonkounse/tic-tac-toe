@@ -10,8 +10,10 @@ board = GameBoard.new
 game = TicTacToe.new
 
 while game.game_over == false
+  game.list_players(p1, p2)
   game.game_loop(p1, board, game)
   break unless game.game_over == false
 
+  game.list_players(p1, p2)
   game.game_loop(p2, board, game)
 end
