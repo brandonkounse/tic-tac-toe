@@ -3,9 +3,11 @@
 # Game board to play X's and O's
 class GameBoard
   attr_accessor :game_board, :board_spaces
+  attr_reader :winning_spaces
 
   def initialize
     @board_spaces = [*1..9]
+    @winning_spaces = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
   end
 
   def draw_board
@@ -20,11 +22,23 @@ class GameBoard
     @board_spaces[selection - 1] = piece
   end
 
+  def update_winning_spaces(player)
+    @winning_spaces.each do |set|
+      set.map! do |square|
+        if square == player.selection
+          player.piece
+        else
+          square
+        end
+      end
+    end
+  end
+
   def square_available?(selection)
     if @board_spaces[selection - 1].is_a? Numeric
       true
     else
-      puts 'That square is already occupied'
+      puts "\nThat square is already occupied!!\n\n"
       false
     end
   end

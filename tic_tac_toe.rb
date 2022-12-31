@@ -2,26 +2,53 @@
 
 require './game_board'
 require './player'
-require 'pry-byebug'
 
 # Instances of Tic Tac Toe to be played
 class TicTacToe
-  attr_accessor :game_over
+  attr_accessor :game_over, :game_won
 
   def initialize
     @game_over = false
+    @game_won = false
   end
-end
 
-p1 = Player.new('Player 1', 'X')
-p2 = Player.new('Player 2', 'O')
-board = GameBoard.new
-game = TicTacToe.new
+  def take_turn(player, board)
+    player.place_piece
+    if board.square_available?(player.selection)
+      board.update_board_spaces(player.selection, player.piece)
+    else
+      take_turn(player, board)
+    end
+  end
 
-while game.game_over == false
-  board.draw_board
-  p1.place_piece
-  board.square_available?(p1.selection)
-  board.update_board_spaces(p1.selection, p1.piece)
-  if board.board_full? then game.game_over = true end
+  def three_in_row?(player, board)
+    board.winning_spaces.each do |check|
+      @game_won = true if check.all?(player.piece)
+    end
+  end
+
+  def end_game?(board, game)
+    if board.board_full?
+      game.game_over = true
+      board.draw_board
+    elsif @game_won == true
+      game.game_over = true
+      board.draw_board
+    else
+      game.game_over = false
+    end
+  end
+
+  def victory(player)
+    return puts "#{player.name} is the winner!" if @game_won == true
+  end
+
+  def game_loop(player, board, game)
+    board.draw_board
+    game.take_turn(player, board)
+    board.update_winning_spaces(player)
+    game.three_in_row?(player, board)
+    game.end_game?(board, game)
+    victory(player)
+  end
 end
