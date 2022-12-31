@@ -44,10 +44,10 @@ class TicTacToe
   end
 
   def victory(player)
-    if @game_won == true
-      puts "#{player.name} is the winner!"
-    elsif @game_over == true
+    if @game_over == true && @game_won == false
       puts 'The game is a tie!'
+    elsif @game_won == true
+      puts "#{player.name} is the winner!"
     else
       system 'clear'
     end
