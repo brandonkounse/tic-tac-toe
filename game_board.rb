@@ -24,11 +24,11 @@ class GameBoard
 
   def update_winning_spaces(player)
     @winning_spaces.each do |set|
-      set.map! do |square|
-        if square == player.selection
+      set.map! do |space|
+        if space == player.selection
           player.piece
         else
-          square
+          space
         end
       end
     end
