@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require './player'
-require './game_board'
-require './tic_tac_toe'
+require_relative 'lib/player'
+require_relative 'lib/game_board'
+require_relative 'lib/tic_tac_toe'
 
 p1 = Player.new('Player 1', 'X')
 p2 = Player.new('Player 2', 'O')

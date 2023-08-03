@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require './game_board'
-require './player'
+require_relative 'game_board'
+require_relative 'player'
 
 # Instances of Tic Tac Toe to be played
 class TicTacToe
