@@ -2,15 +2,14 @@
 
 # Store player name and piece information
 class Player
-  attr_reader :name, :piece, :selection
+  attr_reader :name, :piece
 
   def initialize(name, piece)
     @name = name
     @piece = piece
   end
 
-  def place_piece
-    print "Pick a free square to place #{@piece}: "
-    @selection = gets.chomp.to_i
+  def pick_square
+    gets.chomp
   end
 end
