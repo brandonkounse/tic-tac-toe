@@ -20,12 +20,10 @@ class Board
     @squares[selection - 1] = piece if square_available?(selection)
   end
 
-  def board_full?
-    if @squares.any? { |square| square.is_a? Numeric }
-      false
-    else
-      true
-    end
+  def full?
+    return false if @squares.any? { |square| square.is_a? Numeric }
+
+    true
   end
 
   private
