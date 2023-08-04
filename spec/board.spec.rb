@@ -6,7 +6,17 @@ describe Board do
     it 'replaces number with player piece' do
       player_selection = 1
       player_piece = 'x'
-      expect { subject.update_board_squares(player_selection, player_piece) }.to change { subject.board_squares[player_selection - 1] }.to(player_piece)
+      expect { subject.update_square(player_selection, player_piece) }.to change { subject.squares[player_selection - 1] }.to(player_piece)
+    end
+
+    subject(:board) { described_class.new }
+
+    it 'returns square occupied message if square is occupied' do
+      board.squares[0] = 'x'
+      player_selection = 1
+      player_piece = 'o'
+
+      expect { board.update_square(player_selection, player_piece) }.to output("\nThat square is already occupied!!\n\n").to_stdout
     end
   end
 end
