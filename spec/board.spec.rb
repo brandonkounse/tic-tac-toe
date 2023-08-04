@@ -19,4 +19,25 @@ describe Board do
       expect { board.update_square(player_selection, player_piece) }.to output("\nThat square is already occupied!!\n\n").to_stdout
     end
   end
+
+  context 'when the board is full' do
+    subject(:full_board) { described_class.new }
+
+    before do
+      full_board.squares.map! { |square| square = 'x' }
+    end
+
+    it 'returns true if board is full' do
+      expect(full_board.full?).to be true
+    end
+  end
+
+  context 'when the board is not full' do
+    subject(:partial_board) { described_class.new }
+
+    it 'returns false if board is not full' do
+      partial_board.squares[0] = 'x'
+      expect(partial_board.full?).to be false
+    end
+  end
 end
