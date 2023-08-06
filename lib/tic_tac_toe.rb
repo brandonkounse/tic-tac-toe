@@ -7,20 +7,20 @@ require_relative 'player'
 class TicTacToe
   attr_reader :game_over, :game_won, :player_one, :player_two, :board
 
-  def initialize
+  def initialize(player_one, player_two, board = Board.new)
     @game_over = false
     @game_won = false
-    @player_one = Player.new('Player 1', 'X')
-    @player_two = Player.new('Player 2', 'O')
-    @board = Board.new
+    @player_one = player_one
+    @player_two = player_two
+    @board = board
   end
 
   def game_loop
     @board.draw
-    game.take_turn(@player_one)
+    take_turn(@player_one)
     board.update_winning_combinations(player)
-    game.three_in_row?(player, board)
-    game.end_game?(board, game)
+    three_in_row?(player, board)
+    end_game?(board, game)
     victory(player)
   end
 
@@ -29,8 +29,13 @@ class TicTacToe
   end
 
   def take_turn(player)
-    player.pick_square
-    take_turn(player) unless @board.update_square(player.piece) == true
+    loop do
+      square = player.pick_square
+      if valid_input?(square) && board.square_available?(square.to_i)
+        @board.update_square(square.to_i, player.piece)
+        break
+      end
+    end
   end
 
   def three_in_row?(player, board)
@@ -59,5 +64,14 @@ class TicTacToe
     else
       system 'clear'
     end
+  end
+
+  private
+
+  def valid_input?(player_input)
+    return true if (player_input).match?(/[1-9]/)
+
+    puts 'Please enter a valid square!'
+    false
   end
 end
