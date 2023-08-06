@@ -20,14 +20,6 @@ class Board
     @squares[selection - 1] = piece if square_available?(selection)
   end
 
-  def full?
-    return false if @squares.any? { |square| square.is_a? Numeric }
-
-    true
-  end
-
-  private
-
   def square_available?(selection)
     if @squares[selection - 1].is_a? Numeric
       true
@@ -35,5 +27,11 @@ class Board
       puts "\nThat square is already occupied!!\n\n"
       false
     end
+  end
+
+  def full?
+    return false if @squares.any? { |square| square.is_a? Numeric }
+
+    true
   end
 end
