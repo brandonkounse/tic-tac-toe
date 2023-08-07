@@ -39,6 +39,7 @@ class TicTacToe
 
   def take_turn(player)
     loop do
+      print "Please select a square for your piece: "
       square = player.pick_square
       if valid_input?(square) && board.square_available?(square.to_i)
         @board.update_square(square.to_i, player.piece)
