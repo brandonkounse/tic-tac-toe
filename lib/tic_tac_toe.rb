@@ -3,29 +3,38 @@
 require_relative 'board'
 require_relative 'player'
 
-# Instances of Tic Tac Toe to be played
 class TicTacToe
-  attr_reader :game_over, :game_won, :player_one, :player_two, :board
+  attr_reader :player_one, :player_two, :board
 
   def initialize(player_one, player_two, board = Board.new)
-    @game_over = false
-    @game_won = false
     @player_one = player_one
     @player_two = player_two
     @board = board
   end
 
-  def game_loop
-    @board.draw
-    take_turn(@player_one)
-    board.update_winning_combinations(player)
-    three_in_row?(player, board)
-    end_game?(board, game)
-    victory(player)
+  def play
+    loop do
+      break if handle_turn(@player_one)
+      break if @board.full?
+      break if handle_turn(@player_two)
+      break if @board.full?
+    end
+
+    if three_in_row?(@player_one)
+      declare_winner(@player_one)
+    elsif three_in_row?(@player_two)
+      declare_winner(@player_two)
+    else
+      puts "It's a draw!"
+    end
   end
 
   def list_players
     puts "\n#{@player_one.name}: #{@player_one.piece}  |  #{@player_two.name}: #{@player_two.piece}"
+  end
+
+  def declare_winner(player)
+    puts "#{player.name} wins!"
   end
 
   def take_turn(player)
@@ -38,38 +47,24 @@ class TicTacToe
     end
   end
 
-  def three_in_row?(player, board)
-    board.winning_combinations.each do |check|
-      @game_won = true if check.all?(player.piece)
-    end
+  def handle_turn(player)
+    system 'clear'
+    list_players
+    @board.draw
+    take_turn(player)
+    three_in_row?(player)
   end
 
-  def end_game?(board, game)
-    if board.board_full?
-      game.game_over = true
-      board.draw_board
-    elsif @game_won == true
-      game.game_over = true
-      board.draw_board
-    else
-      game.game_over = false
-    end
-  end
-
-  def victory(player)
-    if @game_over == true && @game_won == false
-      puts 'The game is a tie!'
-    elsif @game_won == true
-      puts "#{player.name} is the winner!"
-    else
-      system 'clear'
+  def three_in_row?(player)
+    @board.winning_combinations.any? do |combo|
+      combo.all? { |value| @board.squares[value] == player.piece }
     end
   end
 
   private
 
   def valid_input?(player_input)
-    return true if (player_input).match?(/[1-9]/)
+    return true if (player_input).match?(/\A[1-9]\z/)
 
     puts 'Please enter a valid square!'
     false
