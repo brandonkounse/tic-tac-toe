@@ -2,13 +2,21 @@ require 'spec_helper'
 require_relative '../lib/board'
 
 describe Board do
-  context 'when updating board square' do
+  context 'when updating an available board square' do
     it 'replaces number with player piece' do
       player_selection = 1
       player_piece = 'x'
       expect { subject.update_square(player_selection, player_piece) }.to change { subject.squares[player_selection - 1] }.to(player_piece)
     end
 
+    it 'replaces another number with player piece' do
+      player_selection = 5
+      player_piece = 'o'
+      expect { subject.update_square(player_selection, player_piece) }.to change { subject.squares[player_selection - 1] }.to(player_piece)
+    end
+  end
+
+  context 'when updating a square that\'s already taken' do
     subject(:board) { described_class.new }
 
     it 'returns square occupied message if square is occupied' do
