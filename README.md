@@ -15,4 +15,6 @@ Player.new(42, '#') or Player.new('!!', '17')
 
 The game follows the typical ruleset. Three symbols in a row means the player that own's that symbol is the winner. Likewise, if the board is full and there is no winner, the game is a draw.
 
+A live demo of this version can be found on [Replit](https://replit.com/@Korrokas/TicTacToe).
+
 More information about TicTacToe can be found on [Wikipedia](https://en.wikipedia.org/wiki/Tic-tac-toe).
