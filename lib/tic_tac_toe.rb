@@ -20,6 +20,8 @@ class TicTacToe
       break if @board.full?
     end
 
+    information
+
     if three_in_row?(@player_one)
       declare_winner(@player_one)
     elsif three_in_row?(@player_two)
@@ -29,17 +31,8 @@ class TicTacToe
     end
   end
 
-  def list_players
-    puts "\n#{@player_one.name}: #{@player_one.piece}  |  #{@player_two.name}: #{@player_two.piece}"
-  end
-
-  def declare_winner(player)
-    puts "#{player.name} wins!"
-  end
-
   def take_turn(player)
     loop do
-      print "Please select a square for your piece: "
       square = player.pick_square
       if valid_input?(square) && board.square_available?(square.to_i)
         @board.update_square(square.to_i, player.piece)
@@ -49,9 +42,8 @@ class TicTacToe
   end
 
   def handle_turn(player)
-    system 'clear'
-    list_players
-    @board.draw
+    information
+    print "Please select a square for #{player.piece}: "
     take_turn(player)
     three_in_row?(player)
   end
@@ -69,5 +61,19 @@ class TicTacToe
 
     puts 'Please enter a valid square!'
     false
+  end
+
+  def information
+    system 'clear'
+    list_players
+    @board.draw
+  end
+
+  def list_players
+    puts "\n#{@player_one.name}: #{@player_one.piece}  |  #{@player_two.name}: #{@player_two.piece}"
+  end
+
+  def declare_winner(player)
+    puts "#{player.name} wins!"
   end
 end
