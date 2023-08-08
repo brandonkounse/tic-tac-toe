@@ -21,14 +21,7 @@ class TicTacToe
     end
 
     information
-
-    if three_in_row?(@player_one)
-      declare_winner(@player_one)
-    elsif three_in_row?(@player_two)
-      declare_winner(@player_two)
-    else
-      puts "It's a draw!"
-    end
+    declare_winner
   end
 
   def take_turn(player)
@@ -73,7 +66,13 @@ class TicTacToe
     puts "\n#{@player_one.name}: #{@player_one.piece}  |  #{@player_two.name}: #{@player_two.piece}"
   end
 
-  def declare_winner(player)
-    puts "#{player.name} wins!"
+  def declare_winner
+    if three_in_row?(@player_one)
+      puts "#{@player_one.name} wins!"
+    elsif three_in_row?(@player_two)
+      puts "#{@player_two.name} wins!"
+    else
+      puts "It's a draw!"
+    end
   end
 end
